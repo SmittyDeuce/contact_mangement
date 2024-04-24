@@ -8,6 +8,7 @@ User Interface (UI):
 
 Create a user-friendly command-line interface (CLI) for the Contact Management System.
 Display a welcoming message and provide a menu with the following options:
+
 Welcome to the Contact Management System! Menu:
 Add a new contact
 Edit an existing contact
