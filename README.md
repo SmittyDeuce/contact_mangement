@@ -4,6 +4,7 @@ coding Temple's contact management mini project
 Project Requirements
 Your task is to develop a Contact Management System with the following features:
 
+# done 
 User Interface (UI):
 
 Create a user-friendly command-line interface (CLI) for the Contact Management System.
@@ -19,20 +20,8 @@ Export contacts to a text file
 Import contacts from a text file
 Quit
 '>
+# done ^
 
-
-
-Welcome to the Contact Management System!
-Menu:
-Add a new contact
-Edit an existing contact
-Delete a contact
-Search for a contact
-Display all contacts
-Export contacts to a text file
-Import contacts from a text file
-Quit
-```
 Contact Data Storage:
 Use nested dictionaries as the main data structure for storing contact information.
 Each contact should have a unique identifier (e.g., a phone number or email address) as the outer dictionary key.
