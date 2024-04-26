@@ -18,18 +18,32 @@ def contactManagement():
                 print("Invalid Response: choice needs to be number between 1 - 8")
             
             if menuOption == 1:
-                unique_identifier = input("Enter Phone or Email for Identifier: ")
-                phone_match = r"\b\d{1,10}\b"
-                phone_match_res = re.findall(phone_match, unique_identifier)
-                email_match = r"[a-zA-Z0-9._$]+@[a-zA-Z]\.[a-zA-Z]{2,}"
-                email_match_res = re.findall(email_match, unique_identifier)
-                
-                for number in phone_match_res:
-                    for email in email_match_res:
-                        print(f"email:\n{email}")
-                
-            else:
-                pass
+                while True:
+                    unique_identifier = input("Enter Phone or Email for Identifier: (enter 'done' when finished) ")
+                    phone_match = r"\b\d{1,10}\b"
+                    phone_match_res = re.findall(phone_match, unique_identifier)
+                    email_match = r"[a-zA-Z0-9._$%+-]+@[a-zA.-Z]+\.[a-zA-Z]{2,}"
+                    email_match_res = re.findall(email_match, unique_identifier)
+                    
+                    if unique_identifier.lower() == 'done':
+                        print(f"Contact Info: {contact_info}")
+                        break
+
+                    if phone_match_res:
+                        number = phone_match_res[0]
+                        contact_info[number] = []
+                        print("Added Phone: ", number)
+
+                    if email_match_res:
+                        email = email_match_res[0]
+                        contact_info[email] = []
+                        print("Added Email: ", email)
+
+                    if not (phone_match_res or email_match_res) and unique_identifier.lower() != 'done':
+                        print("Invalid Input: Enter Valid Email or Phone Number")
+
+            # else:
+            #     pass
         except ValueError:
             print("response needs to be a integer between")
             
