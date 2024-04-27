@@ -43,32 +43,37 @@ def contactManagement():
                         print("Invalid Input: Enter Valid Email or Phone Number")
 
 
-                    while True:    
-                        additonal_info = input("add more info enter Name, Phone or Email: (enter 'done' when finished) ")
-                        additonal_phone = re.findall(phone_match, additonal_info)
-                        additonal_email = re.findall(email_match, additonal_info)
-                        name_match = r'[A-Za-z]+ [A-Za-z]+'
-                        contact_name = re.findall(name_match, additonal_info)
-                        
-                        if additonal_info.lower() == 'done':
-                            print(f"Contact Info: ', {contact_info}")
-                            break
-                        
-                        if contact_name:
-                            name = contact_name[0]
-                            for identifier in contact_info:
-                                    contact_info[identifier].append(f"Name: {name}")
-                        
-                        if additonal_email:
-                            email = additonal_email[0]
-                            for identifier in contact_info:
-                                contact_info[identifier].append(f"Email: {email}")
+                    while True:
+                        try:    
+                            additonal_info = input("add more info enter Name, Phone or Email: (enter 'done' when finished) ")
+                            additonal_phone = re.findall(phone_match, additonal_info)
+                            additonal_email = re.findall(email_match, additonal_info)
+                            name_match = r'[A-Za-z]+ [A-Za-z]+'
+                            contact_name = re.findall(name_match, additonal_info)
+                            
+                            if additonal_info.lower() == 'done':
+                                print(f"Contact Info: ', {contact_info}")
+                                break
+                            
+                            if contact_name:
+                                name = contact_name[0]
+                                for identifier in contact_info:
+                                        contact_info[identifier].append(f"Name: {name}")
+                            
+                            if additonal_email:
+                                email = additonal_email[0]
+                                for identifier in contact_info:
+                                    contact_info[identifier].append(f"Email: {email}")
 
-                        if additonal_phone:
-                            phone = additonal_phone[0]
-                            for identifer in contact_info:
-                                contact_info[identifier].append(f"Phone: {phone}")
-            # if menuOption == 2:
+                            if additonal_phone:
+                                phone = additonal_phone[0]
+                                for identifer in contact_info:
+                                    contact_info[identifier].append(f"Phone: {phone}")
+                        except Exception as e:
+                            print(f"An error occured: {e} Please try again.")
+           
+           
+            if menuOption == 2:
 
 
 

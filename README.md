@@ -70,3 +70,9 @@ Contact Search (Bonus): Enhance the contact search functionality to allow users 
 Contact Sorting (Bonus): Implement sorting options to display contacts alphabetically by name or based on other criteria.
 Backup and Restore (Bonus): Add features to create automatic backups of contact data and the ability to restore data from a backup file.
 Custom Contact Fields (Bonus): Allow users to define custom fields for contacts (e.g., birthdays, anniversaries) and store this information.
+
+
+
+####################################################################
+
+A couple days in as I write this, first steps I took were to do the menu options and get that situated. I then start to focus on the coding to make each option work, just now I believe I am completely finished with option 1 as I have a way to get input on unique identifier and add that as a key; and then ask input on name, email, or phone to add those as key, value pairs but, as values inside unique identifier. Next I will be doing option 2 edit which will let me change, add, or delete the inner key,value pairs.
