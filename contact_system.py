@@ -74,8 +74,37 @@ def contactManagement():
            
            
             if menuOption == 2:
+                while True:
+                    to_edit = input("Enter Unique identifier: (enter 'done' when finished) ")
+                    if to_edit.lower() == "done":
+                        break
 
+                    for identifier in contact_info:
+                        if to_edit.lower() == identifer.lower():
+                            while True:
+                                add_edit_delete = input("do you want to add, edit, or delete information: (enter 'done' when finished) ").lower()
+                                print(contact_info)
+                                if add_edit_delete == 'done':
+                                    break
+                                
+                                if add_edit_delete == 'add':
+                                    while True:
+                                        to_add = input("Enter What you want to add: (enter 'done' when finished) ")
+                                        
+                                        phone_match = r"\b\d{1,10}\b"
+                                        email_match = r"[a-zA-Z0-9._$%+-]+@[a-zA.-Z]+\.[a-zA-Z]{2,}"
+                                        name_match = r'[A-Za-z]+ [A-Za-z]+'
 
+                                        phone_match_res = re.findall(phone_match, to_add)
+                                        email_match_res = re.findall(email_match, to_add)
+                                        contact_name = re.findall(name_match, to_add)
+                                        
+                                        if to_add.lower() == "done":
+                                            print(contact_info)
+                                            break
+
+                                        if phone_match_res:
+                                            
 
 
 
