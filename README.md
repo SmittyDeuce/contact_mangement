@@ -76,3 +76,9 @@ Custom Contact Fields (Bonus): Allow users to define custom fields for contacts 
 ####################################################################
 
 A couple days in as I write this, first steps I took were to do the menu options and get that situated. I then start to focus on the coding to make each option work, just now I believe I am completely finished with option 1 as I have a way to get input on unique identifier and add that as a key; and then ask input on name, email, or phone to add those as key, value pairs but, as values inside unique identifier. Next I will be doing option 2 edit which will let me change, add, or delete the inner key,value pairs.
+
+
+
+
+two days later, I continued to do menu Option 2 but was running into error "An error occured: list indices must be integers or slices, not str Please try again." which led me into seeing the values are being treated as a list and not key-val pair I initialized them as 'contact_info[identifier][Email] = email thinking braket notation would do it but it needed to be done {"Email": email} after figuring that out, I came across an error "An error occured: dictionary changed size during iteration Please try again." which led me to find out about update and .setdefault()
+
