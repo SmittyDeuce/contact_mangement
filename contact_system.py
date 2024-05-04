@@ -96,8 +96,8 @@ def contactManagement():
                                     continue
                                             
                                 
-                            else:
-                                print("Invalid response: enter 1 of 3 options ")
+                            if additonal_info not in ["name", "email", 'phone']:
+                                print("Invalid Response: enter 1 of the 3 options")
                             
                   
                         except Exception as e:
