@@ -4,7 +4,7 @@ import os
 def contactManagement():
     print("Welcome to the Contact Management System! \nmenu:")
     menu = "1: Add a new Contact\n2: Edit an existing contact\n3: Delete a contact\n4: Search for a contact\n5: Display all contacts\n6: Export contacts to a text file\n7: Import contacts from a text file\n8: Quit "
-    updates = {}
+   
     contact_info = {}
     
     while True:
@@ -31,12 +31,12 @@ def contactManagement():
 
                     if phone_match_res:
                         number = phone_match_res[0]
-                        contact_info[number] = []
+                        contact_info[number] = {}
                         print("Added Phone: ", number)
 
                     if email_match_res:
                         email = email_match_res[0]
-                        contact_info[email] = []
+                        contact_info[email] = {}
                         print("Added Email: ", email)
 
                     if not (phone_match_res or email_match_res) and unique_identifier.lower() != 'done':
@@ -44,40 +44,62 @@ def contactManagement():
     
                     while True:
                         try:    
-                            additonal_info = input("add more info enter Name, Phone or Email: (enter 'done' when finished) ")
-                            additonal_phone = re.findall(phone_match, additonal_info)
-                            additonal_email = re.findall(email_match, additonal_info)
-                            name_match = r'[A-Za-z]+ [A-Za-z]+'
-                            contact_name = re.findall(name_match, additonal_info)
+                            additonal_info = input("type 'Name', 'Email' or 'Phone' to add more info: (enter 'done' when finished) ").lower()
                             
-                            if additonal_info.lower() == 'done':
+                            if additonal_info == 'done':
                                 print(f"Contact Info: ', {contact_info}")
                                 break
                             
-                            if contact_name:
-                                name = contact_name[0]
-                                for identifier, value in contact_info.items():
-                                    if isinstance(contact_info[identifier],dict):
-                                        updates.setdefault(identifier, {}).update({"Name": name})
-                                    else:
-                                        updates[identifier] = {"Name": name}
-                            
-                            elif additonal_email:
-                                email = additonal_email[0]
-                                for identifier, value in contact_info.items():
-                                    if isinstance(contact_info[identifier],dict):
-                                        updates.setdefault(identifier,{}).update({"Email": email})
-                                    else:
-                                       updates[identifier] = {"Email": email}
+                            if additonal_info == 'name':
+                                enter_name = input("Enter Name: ")
+                                name_match = r'[A-Za-z]+ [A-Za-z]+'
+                                contact_name = re.findall(name_match, enter_name)
 
-                            elif additonal_phone:
-                                phone = additonal_phone[0]
-                                for identifier, value in contact_info.items():
-                                    if isinstance(contact_info[identifier], dict):
-                                        updates.setdefault(identifier, {}).update({"Phone": phone})
-                                    else:
-                                        updates[identifier] = {"Phone": phone}
-                            contact_info.update(updates)      
+                                if contact_name:
+                                    name = contact_name[0]
+                                    for identifier, value in contact_info.items():
+                                        if "Name" not in value:
+                                            value["Name"] = name
+                                            print(contact_info)
+                                        else:
+                                            print("Name already exists for contact")
+                            
+                            if additonal_info == 'email':
+                                enter_email = input("Enter Email: ")
+                                additonal_email = re.findall(email_match, enter_email)
+
+                                if additonal_email:
+                                    email = additonal_email[0]
+                                    for identifier, value in contact_info.items():
+                                        if "Email" not in value:
+                                            value["Email"] = email
+                                            print(contact_info)
+                                        else:
+                                            print("Email already exists")
+                                else:
+                                    print("Please check email.")
+                                    continue
+                            if additonal_info == "phone":
+                                enter_phone = input("Enter Phone: ")
+                                additonal_phone = re.findall(phone_match, enter_phone)
+
+                                if additonal_phone:
+                                    phone_number = additonal_phone[0]
+                                    for identifier, value in contact_info.items():
+                                        if "Phone" not in value:
+                                            value["Phone"] = phone_number
+                                        else:
+                                            print("Phone number already exists")
+
+                                else:
+                                    print("make sure to enter a phone number")
+                                    continue
+                                            
+                                
+                            else:
+                                print("Invalid response: enter 1 of 3 options ")
+                            
+                  
                         except Exception as e:
                             print(f"An error occured: {e} Please try again.")
            
@@ -110,10 +132,17 @@ def contactManagement():
 
                                             if phone_match_res:
                                                 phone_number = phone_match_res[0]
-                                                current_number = inner_information.values()
-                                                inner_information = {"Phone": current_number, phone_number}
+                                                # current_number = inner_information.values()
+                                                # # inner_information = {"Phone": current_number, phone_number}
+                                                
+                                                phone_lists = inner_information["Phone"]
+                                                print(phone_lists)
+                                                # phone_lists.append(phone_number)
+                                                print(phone_lists)
+                                                inner_information["Phone"] = phone_lists
 
-                                               
+                                                print(contact_info)
+                                                
                                                     
                                         else:
                                             pass
