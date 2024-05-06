@@ -20,7 +20,7 @@ def contactManagement():
             if menuOption == 1:
                 while True:
                     unique_identifier = input("Enter Phone or Email for Identifier: (enter 'done' when finished) ")
-                    phone_match = r"\b\d{1,10}\b"
+                    phone_match = r"^\d{10}$"
                     phone_match_res = re.findall(phone_match, unique_identifier)
                     email_match = r"[a-zA-Z0-9._$%+-]+@[a-zA.-Z]+\.[a-zA-Z]{2,}"
                     email_match_res = re.findall(email_match, unique_identifier)
@@ -41,6 +41,7 @@ def contactManagement():
 
                     if not (phone_match_res or email_match_res) and unique_identifier.lower() != 'done':
                         print("Invalid Input: Enter Valid Email or Phone Number")
+                        continue
     
                     while True:
                         try:    
@@ -57,9 +58,9 @@ def contactManagement():
 
                                 if contact_name:
                                     name = contact_name[0]
-                                    for identifier, value in contact_info.items():
-                                        if "Name" not in value:
-                                            value["Name"] = name
+                                    for identifier, inner_information in contact_info.items():
+                                        if "Name" not in inner_information:
+                                            inner_information["Name"] = name
                                             print(contact_info)
                                         else:
                                             print("Name already exists for contact")
@@ -70,9 +71,9 @@ def contactManagement():
 
                                 if additonal_email:
                                     email = additonal_email[0]
-                                    for identifier, value in contact_info.items():
-                                        if "Email" not in value:
-                                            value["Email"] = email
+                                    for identifier, inner_information in contact_info.items():
+                                        if "Email" not in inner_information:
+                                            inner_information["Email"] = email
                                             print(contact_info)
                                         else:
                                             print("Email already exists")
@@ -85,9 +86,9 @@ def contactManagement():
 
                                 if additonal_phone:
                                     phone_number = additonal_phone[0]
-                                    for identifier, value in contact_info.items():
-                                        if "Phone" not in value:
-                                            value["Phone"] = phone_number
+                                    for identifier, inner_information in contact_info.items():
+                                        if "Phone" not in inner_information:
+                                            inner_information["Phone"] = phone_number
                                         else:
                                             print("Phone number already exists")
 
@@ -105,53 +106,104 @@ def contactManagement():
            
            
             if menuOption == 2:
-                while True:
-                    to_edit = input("edit Phone, Email, or Name?: (enter 'done' when finished) ").lower().strip()
-                    email_match = r"[a-zA-Z0-9._$%+-]+@[a-zA.-Z]+\.[a-zA-Z]{2,}"
-                    name_match = r'[A-Za-z]+ [A-Za-z]+'
 
-                    email_match_res = re.findall(email_match, to_edit)
-                    name_match_res = re.findall(name_match, to_edit)
+                phone_match = r"^\d{10}$"
+                name_match = r'[A-Za-z]+ [A-Za-z]+'
+                email_match = r"[a-zA-Z0-9._$%+-]+@[a-zA.-Z]+\.[a-zA-Z]{2,}"
+
+                # email_match_res = re.findall(email_match, unique_identifier)
+                # contact_name = re.findall(name_match, enter_name)
+
+                while True:
+                    print(contact_info)
+                    which_identifier = input("Enter Identifier to edit: (enter 'done' when finished) ").lower()
                     
-                    if to_edit == 'phone':
-                        
-                            for identifier, inner_information in contact_info.items():
-                                print("Key: ", identifier)
-                                print("Value: ", inner_information)
-                                
-                                if "Phone" in inner_information:
-                                    while True:
-                                        phone_exists = input("Phone exists do you want to replace or add?: (enter 'no' ) ").lower()
-                                        if phone_exists == "no":
+                    if which_identifier == 'done':
+                        print(contact_info)
+                        break
+
+                    for identifier, inner_information in contact_info.items():
+                        if which_identifier == identifier:
+                            while True:
+                                add_or_replace = input("Add or Replace *enter information type*\n(ex 'add phone, replace email):\n(enter 'done' when finished) ").lower().strip()
+                                if add_or_replace == 'done':
+                                    print(contact_info)
+                                    break
+
+                                if add_or_replace == 'add phone':
+                                    if 'Phone' in inner_information:
+                                        print(f"Phone: {inner_information['Phone']}")
+                                        replace_information = input("information exists replace it?: ").lower()
+                                        
+                                        if replace_information == "yes":
+                                            while True:
+                                                enter_phone = input("Enter Phone: ")
+                                                phone_match_res = re.fullmatch(phone_match, enter_phone)
+                                                if phone_match_res:
+                                                    phone_number = phone_match_res[0]
+                                                    inner_information["Phone"] = phone_number
+                                                    print(inner_information)
+                                                    break
+                            
+                                                else:
+                                                    print("Phone needs to be entered like: 0123456789\ntry again")
+                                                    continue
+                                    
+                                    else:
+                                        enter_phone = input("Enter Phone: ")
+                                        phone_match_res = re.fullmatch(phone_match, enter_phone)
+                                        if phone_match_res:
+                                            phone_number = phone_match_res[0]
+                                            inner_information["Phone"] = phone_number
                                             print(inner_information)
                                             break
-                                        if phone_exists == "add":
-                                            add_phone = input("enter phone ")
-                                            phone_match = r"\b\d{1,10}\b"
-                                            phone_match_res = re.findall(phone_match, add_phone)
-
-                                            if phone_match_res:
-                                                phone_number = phone_match_res[0]
-                                                # current_number = inner_information.values()
-                                                # # inner_information = {"Phone": current_number, phone_number}
-                                                
-                                                phone_lists = inner_information["Phone"]
-                                                print(phone_lists)
-                                                # phone_lists.append(phone_number)
-                                                print(phone_lists)
-                                                inner_information["Phone"] = phone_lists
-
-                                                print(contact_info)
-                                                
-                                                    
-                                        else:
-                                            pass
-
+##################################################################################
+                                if add_or_replace == 'add email':
+                                    if 'Email' in inner_information:
+                                        print(f"Email: {inner_information['Email']}")
+                                        replace_information = input("information exists replace it?: ").lower()
+                                        
+                                        if replace_information == "yes":
+                                            while True:
+                                                enter_email = input("Enter Email: ")
+                                                email_match_res = re.fullmatch(email_match, enter_email)
+                                                if email_match_res:
+                                                    email = email_match_res[0]
+                                                    inner_information["Email"] = email
+                                                    print(inner_information)
+                                                    break
                             
+                                                else:
+                                                    print(f"Invalid Email: {enter_email}\ntry again")
+                                                    continue
+                                    
+                                    else:
+                                        enter_email = input("Enter Email: ")
+                                        email_match_res = re.fullmatch(email_match, enter_email)
+                                        if email_match_res:
+                                            email = email_match_res[0]
+                                            inner_information["Email"] = email
+                                            print(inner_information)
+                                            break
 
 
-            # else:
-            #     pass
+                                else:
+                                    while True:
+                                        enter_phone = input("Enter Phone: ")
+                                        phone_match_res = re.fullmatch(phone_match, enter_phone)
+                                        if phone_match_res:
+                                            phone_number = phone_match_res[0]
+                                            inner_information["Phone"] = phone_number
+                                            print(inner_information)
+                                            break
+                            
+                                        else:
+                                            print("Phone needs to be entered as: 123456789\ntry again")
+                                            continue
+                        else:
+                            print(f"Identifier:{which_identifier}\ndoesn't exist try again")
+                            continue
+                  
         except ValueError:
             print("response needs to be a integer between")
             
