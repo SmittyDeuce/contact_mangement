@@ -82,3 +82,8 @@ A couple days in as I write this, first steps I took were to do the menu options
 
 two days later, I continued to do menu Option 2 but was running into error "An error occured: list indices must be integers or slices, not str Please try again." which led me into seeing the values are being treated as a list and not key-val pair I initialized them as 'contact_info[identifier][Email] = email thinking braket notation would do it but it needed to be done {"Email": email} after figuring that out, I came across an error "An error occured: dictionary changed size during iteration Please try again." which led me to find out about update and .setdefault()
 
+
+
+
+
+since last entry i was rewriting code in menuOption 1 and 2 mainly 2 as that was completely broken after finding error in the 1:1 with Daniel? the main part of my fixing i enabled the user to add "phone, email, and name" if not present already and if it is present give them an option to replace them. That was done for both "add" *information type* and "replace" *information type* 
