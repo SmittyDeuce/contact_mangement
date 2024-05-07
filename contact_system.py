@@ -360,7 +360,21 @@ def contactManagement():
                         if confirm_delete == 'no':
                             break
 
+                        else:
+                            print("Reply 'yes' or 'no' ")
+                    else:
+                        print(f"Contact {delete_contact} not found check identifier and try again")
+                        continue
+##################################################################################################
 
+            if menuOption == 4:
+                while True:
+                    contact_search = input("Enter identifier to search by: (enter 'done' when finished)\n")
+                    if contact_search == 'done':
+                        break
+
+                    if contact_search in contact_info:
+                        
         except ValueError:
             print("response needs to be a integer between")
             
