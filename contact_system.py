@@ -125,9 +125,8 @@ def contactManagement():
                     for identifier, inner_information in contact_info.items():
                         if which_identifier == identifier:
                             while True:
-                                add_or_replace = input("Add or Replace *enter information type*\n(ex 'add phone, replace email):\n(enter 'done' when finished) ").lower().strip()
+                                add_or_replace = input("\nenter 'add' or 'replace *information type*:\n(ex 'add phone, replace email):\n\n(enter 'done' when finished)\n").lower().strip()
                                 if add_or_replace == 'done':
-                                    print(contact_info)
                                     break
 
                                 if add_or_replace == 'add phone':
@@ -185,25 +184,161 @@ def contactManagement():
                                             inner_information["Email"] = email
                                             print(inner_information)
                                             break
-
-
-                                else:
-                                    while True:
-                                        enter_phone = input("Enter Phone: ")
-                                        phone_match_res = re.fullmatch(phone_match, enter_phone)
-                                        if phone_match_res:
-                                            phone_number = phone_match_res[0]
-                                            inner_information["Phone"] = phone_number
+                            
+##############################################################################
+                                if add_or_replace == 'add name':
+                                    if 'Name' in inner_information:
+                                        print(f"Name: {inner_information['Name']}")
+                                        replace_information = input("information exists replace it?: ").lower()
+                                        
+                                        if replace_information == "yes":
+                                            while True:
+                                                enter_name = input("Enter Name: ")
+                                                contact_name = re.fullmatch(name_match, enter_name)
+                                                if contact_name:
+                                                    name = contact_name[0]
+                                                    inner_information["Name"] = name
+                                                    print(inner_information)
+                                                    break
+                            
+                                                else:
+                                                    print(f"please enter a name")
+                                                    continue
+                                    
+                                    else:
+                                        enter_name = input("Enter Name: ")
+                                        contact_name = re.fullmatch(name_match, enter_name)
+                                        if contact_name:
+                                            name = contact_name[0]
+                                            inner_information["Name"] = name
                                             print(inner_information)
                                             break
-                            
-                                        else:
-                                            print("Phone needs to be entered as: 123456789\ntry again")
-                                            continue
+                  ##################################################################
+                                if add_or_replace == "replace email":
+                                    if 'Email' in inner_information:
+                                        print(f"Email: {inner_information['Email']}")
+                                        while True:
+                                            enter_email = input("Enter Email: ")
+                                            email_match_res = re.fullmatch(email_match, enter_email)
+                                            if email_match_res:
+                                                email = email_match_res[0]
+                                                inner_information["Email"] = email
+                                                print(inner_information)
+                                                break
+                        
+                                            else:
+                                                print(f"Invalid Email: {enter_email}\ntry again")
+                                                continue
+
+                                    else:
+                                        while True:
+                                            no_email = input("No email present add one? ").lower()
+                                            if no_email == 'no':
+                                                print(contact_info)
+                                                break
+
+                                            if no_email == 'yes':
+                                                enter_email = input("Enter Email: ")
+                                                email_match_res = re.fullmatch(email_match, enter_email)
+                                                if email_match_res:
+                                                    email = email_match_res[0]
+                                                    inner_information["Email"] = email
+                                                    print(inner_information)
+                                                    break
+                                                else:
+                                                        print(f"Invalid Email: {enter_email}\ntry again")
+                                                        continue
+
+                                            else:
+                                                print("reply 'yes' or 'no'")
+                                                continue
+##################################################################################
+                                
+                                if add_or_replace == "replace name":
+                                    if 'Name' in inner_information:
+                                        print(f"Name: {inner_information['Name']}")
+                                        while True:
+                                            enter_name = input("Enter Name: ")
+                                            contact_name = re.fullmatch(name_match, enter_name)
+                                            if contact_name:
+                                                name = contact_name[0]
+                                                inner_information["Name"] = name
+                                                print(inner_information)
+                                                break
+                        
+                                            else:
+                                                print(f"please enter a name")
+                                                continue
+
+                                    else:
+                                        while True:
+                                            no_name = input("No name present add one?: ")
+                                            if no_name == "no":
+                                                print(contact_info)
+                                                break
+
+                                            if no_name == 'yes':
+                                                enter_name = input("Enter Name: ")
+                                                contact_name = re.fullmatch(name_match, enter_name)
+                                                if contact_name:
+                                                    name = contact_name[0]
+                                                    inner_information["Name"] = name
+                                                    print(inner_information)
+                                                    break
+                        
+                                                else:
+                                                    print(f"please enter a name")
+                                                    continue
+                                            
+                                            else:
+                                                print("reply 'yes' or 'no' ")
+                                                continue
+###############################################################################################
+                                    
+                                if add_or_replace == 'replace phone':
+                                    if 'Phone' in inner_information:
+                                        print(f"Phone: {inner_information['Phone']}")
+                                        while True:
+                                            enter_phone = input("Enter Phone: ")
+                                            phone_match_res = re.fullmatch(phone_match, enter_phone)
+                                            if phone_match_res:
+                                                phone_number = phone_match_res[0]
+                                                inner_information["Phone"] = phone_number
+                                                print(inner_information)
+                                                break
+                        
+                                            else:
+                                                print("Phone needs to be entered like: 0123456789\ntry again")
+                                                continue
+                                
+                                    else:
+                                        while True:
+                                            no_phone = input("No phone present add one?: ")
+                                            if no_phone == "no":
+                                                print(contact_info)
+                                                break
+                                            if no_phone == "yes":
+                                                enter_phone = input("Enter Phone: ")
+                                                phone_match_res = re.fullmatch(phone_match, enter_phone)
+                                                if phone_match_res:
+                                                    phone_number = phone_match_res[0]
+                                                    inner_information["Phone"] = phone_number
+                                                    print(inner_information)
+                                                    break
+
+                                            else:
+                                                print("Reply 'yes' or 'no'")
+                                                continue
+
+                        
+                    
+                        
                         else:
                             print(f"Identifier:{which_identifier}\ndoesn't exist try again")
                             continue
-                  
+
+
+
         except ValueError:
             print("response needs to be a integer between")
             
