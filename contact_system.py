@@ -28,21 +28,30 @@ def contactManagement():
                     if unique_identifier.lower() == 'done':
                         print(f"Contact Info: {contact_info}")
                         break
-
+                        
                     if phone_match_res:
                         number = phone_match_res[0]
-                        contact_info[number] = {}
-                        print("Added Phone: ", number)
+                        if number in contact_info:
+                            print(f"Error: {number} already in system")
+                            continue
+                        else:
+                            contact_info[number] = {}
+                            print("Added Phone: ", number)
 
                     if email_match_res:
                         email = email_match_res[0]
-                        contact_info[email] = {}
-                        print("Added Email: ", email)
+                        if email in contact_info:
+                            print(f"Error: {email} already in system")
+                            continue
+                        else:
+                            contact_info[email] = {}
+                            print("Added Email: ", email)
 
                     if not (phone_match_res or email_match_res) and unique_identifier.lower() != 'done':
                         print("Invalid Input: Enter Valid Email or Phone Number")
                         continue
-    
+                    
+                    
                     while True:
                         try:    
                             additonal_info = input("type 'Name', 'Email' or 'Phone' to add more info: (enter 'done' when finished) ").lower()
@@ -64,7 +73,7 @@ def contactManagement():
                                             print(contact_info)
                                         else:
                                             print("Name already exists for contact")
-                            
+######################################################################################                    
                             if additonal_info == 'email':
                                 enter_email = input("Enter Email: ")
                                 additonal_email = re.findall(email_match, enter_email)
@@ -80,6 +89,7 @@ def contactManagement():
                                 else:
                                     print("Please check email.")
                                     continue
+##################################################################################                                
                             if additonal_info == "phone":
                                 enter_phone = input("Enter Phone: ")
                                 additonal_phone = re.findall(phone_match, enter_phone)
@@ -329,14 +339,26 @@ def contactManagement():
                                             else:
                                                 print("Reply 'yes' or 'no'")
                                                 continue
-
-                        
-                    
-                        
                         else:
                             print(f"Identifier:{which_identifier}\ndoesn't exist try again")
                             continue
+#########################################################################################
+                        
+            if menuOption == 3:
+                print(contact_info)
+                while True:
+                    delete_contact = input("enter identifier to delete: (enter 'done' when finished) \n").lower()
+                    if delete_contact == 'done':
+                        break
 
+                    if delete_contact in contact_info:
+                        confirm_delete = input("are you sure?: ")
+                        if confirm_delete == 'yes':
+                            del contact_info[delete_contact]
+                            print(contact_info)
+                        
+                        if confirm_delete == 'no':
+                            break
 
 
         except ValueError:
