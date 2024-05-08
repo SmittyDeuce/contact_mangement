@@ -369,12 +369,44 @@ def contactManagement():
 
             if menuOption == 4:
                 while True:
-                    contact_search = input("Enter identifier to search by: (enter 'done' when finished)\n")
+                    contact_search = input("Search by Identifier or Contact Information?: (enter 'done' when finished)\n").lower()
                     if contact_search == 'done':
                         break
 
-                    if contact_search in contact_info:
-                        
+                    if contact_search == "identifier":
+                        while True:    
+                            enter_identifier = input("Enter identifier: (enter 'done' when finished) ")
+
+                            if enter_identifier == 'done':
+                                break
+
+                            if enter_identifier in contact_info:
+                                print(contact_info[enter_identifier])
+                                break
+                            else:
+                                print(f"{enter_identifier} is not found, check input and try again")
+                                continue
+                    
+                    elif contact_search == 'information':
+                        while True:
+                            try:
+                                enter_information = input("Enter Email, Phone, or Name: ").lower()
+
+                                if enter_information == 'done':
+                                    break
+                                
+                                for identifier, value in contact_info.items():
+                                    for contact_type, contact_information in value.items():
+                                        if enter_information in contact_information:
+                                            print(contact_info[identifier])
+                                            break
+
+                                        else:
+                                            print("Information not found check spelling")
+                                            continue
+                            except Exception as e:
+                                print("Something went wrong try again")
+                                continue
         except ValueError:
             print("response needs to be a integer between")
             
