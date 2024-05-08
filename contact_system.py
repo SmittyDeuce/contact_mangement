@@ -407,6 +407,33 @@ def contactManagement():
                             except Exception as e:
                                 print("Something went wrong try again")
                                 continue
+
+
+#############################################################
+                
+            if menuOption == 5:
+                while True:
+                    view_sorted = input("view sorted?: ").lower()
+
+                    if view_sorted == 'done':
+                        break
+
+                    elif view_sorted == "yes":
+                        contact_info_sorted = sorted(contact_info)
+                        print(contact_info_sorted)
+                        
+                    elif view_sorted == 'no':
+                        print(contact_info)
+                        
+
+                    else:
+                        print("Reply with 'yes' or 'no'")
+                        continue
+
+
+
+
+
         except ValueError:
             print("response needs to be a integer between")
             
