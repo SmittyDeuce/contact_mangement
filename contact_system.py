@@ -114,7 +114,8 @@ def contactManagement():
                         except Exception as e:
                             print(f"An error occured: {e} Please try again.")
            
-           
+##############################################################
+        
             if menuOption == 2:
 
                 phone_match = r"^\d{10}$"
