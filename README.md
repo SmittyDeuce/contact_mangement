@@ -87,3 +87,7 @@ two days later, I continued to do menu Option 2 but was running into error "An e
 
 
 since last entry i was rewriting code in menuOption 1 and 2 mainly 2 as that was completely broken after finding error in the 1:1 with Daniel? the main part of my fixing i enabled the user to add "phone, email, and name" if not present already and if it is present give them an option to replace them. That was done for both "add" *information type* and "replace" *information type*  fixed double printing of contact info I had a print statement after my unique_identifier input... completed menu option 3 and started option 4
+
+
+
+completed assignment to the best of my knowledge.

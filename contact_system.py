@@ -387,7 +387,7 @@ def contactManagement():
                                 print(f"{enter_identifier} is not found, check input and try again")
                                 continue
                     
-                    elif contact_search == 'information':
+                    if contact_search == 'information':
                         while True:
                             try:
                                 enter_information = input("Enter Email, Phone, or Name: ").lower()
@@ -418,18 +418,85 @@ def contactManagement():
                     if view_sorted == 'done':
                         break
 
-                    elif view_sorted == "yes":
+                    if view_sorted == "yes":
                         contact_info_sorted = sorted(contact_info)
                         print(contact_info_sorted)
                         
-                    elif view_sorted == 'no':
+                    if view_sorted == 'no':
                         print(contact_info)
                         
 
                     else:
                         print("Reply with 'yes' or 'no'")
                         continue
+#################################################################
 
+            if menuOption == 6:
+                while True:
+                    export_contacts = input("do you want to export contacts to .txt file?: (enter 'done' when finished) ").lower()
+                    
+                    if export_contacts == 'done':
+                        break
+                    
+                    if export_contacts == 'no':
+                        break
+
+                    if export_contacts == "yes":
+                        while True:
+                            name_file = input("Name your file: ")
+                            
+                            if name_file.lower() == 'done':
+                                break
+
+                            if not os.path.exists(f"{name_file}.txt"):
+                                with open(f"{name_file}.txt", "a") as file:
+                                    for identifier, inner_information in contact_info.items():
+                                        file.write(f"Identifier: {identifier}\n")
+
+                                        for key, value in inner_information.items():
+                                            file.write(f"{key}: {value}\n")
+                                        file.write("\n")
+                            
+                            else:
+                                with open(f"{name_file}.txt", "w") as file:
+                                    for identifier, inner_information in contact_info.items():
+                                        file.write(f"Identifier: {identifier}\n")
+
+                                        for key, value in inner_information.items():
+                                            file.write(f"{key}: {value}\n")
+                                        file.write("\n")
+
+
+                    else:
+                        print("Respond with 'yes' or 'no' ")
+
+################################################################
+            if menuOption == 7:
+                while True:
+                    import_contacts = input("Do you want to import contacts from a file?: (enter 'done' when finished) ")
+
+                    if import_contacts == 'done':
+                        break
+                    
+                    if import_contacts == 'no':
+                        break
+
+                    if import_contacts == 'yes':
+                        while True:
+                            file_name = input("Enter File Name: (enter 'done' when finished)")
+                            
+                            if file_name.lower() == 'done':
+                                break
+                            
+                            if os.path.exists(f"{file_name}"):
+                                with open (f"{file_name}", "r") as file:
+                                    for line in file:
+                                        print(f"{line}\n")
+
+
+                            else:
+                                print("File not found. try again")
+                                continue
 
 
 
@@ -437,15 +504,6 @@ def contactManagement():
         except ValueError:
             print("response needs to be a integer between")
             
-
-
-
-
-
-
-
-
-
 
 
 
