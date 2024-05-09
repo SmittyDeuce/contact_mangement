@@ -444,7 +444,7 @@ def contactManagement():
 
                     if export_contacts == "yes":
                         while True:
-                            name_file = input("Name your file: ")
+                            name_file = input("Name your file: (enter 'done' when finished) ")
                             
                             if name_file.lower() == 'done':
                                 break
